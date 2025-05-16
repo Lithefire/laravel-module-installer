@@ -8,7 +8,7 @@ use Joshbrw\LaravelModuleInstaller\Exceptions\LaravelModuleInstallerException;
 
 class LaravelModuleInstaller extends LibraryInstaller
 {
-    const DEFAULT_ROOT = "Modules";
+    const DEFAULT_ROOT = "app-modules";
 
     /**
      * {@inheritDoc}
@@ -57,17 +57,7 @@ class LaravelModuleInstaller extends LibraryInstaller
             throw LaravelModuleInstallerException::fromInvalidPackage($name);
         }
 
-        $splitNameToUse = explode("-", $split[1]);
-
-        if (count($splitNameToUse) < 2) {
-            throw LaravelModuleInstallerException::fromInvalidPackage($name);
-        }
-
-        if (array_pop($splitNameToUse) !== 'module') {
-            throw LaravelModuleInstallerException::fromInvalidPackage($name);
-        }
-
-        return implode('', array_map('ucfirst', $splitNameToUse));
+        return $split[1];
     }
 
     /**
